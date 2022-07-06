@@ -1,5 +1,10 @@
 # Ampelkreuzung - Arduino-Guide
 
+TODO:
+- state machine?? -> ans ende als bonus!!
+- auto taster (hall sensor)
+- fußgänger
+
 ## 0. Grundlagen
 
 ### Programmaufbau:
