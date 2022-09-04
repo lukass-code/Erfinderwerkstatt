@@ -64,6 +64,55 @@ void loop() {
 }
 ```
 
+### Switch-Case:
+
+Stelle dir vor du öffnest den Müslischrank morgens und hast mehrere Müslis zu Auswahl. Greifst aber nur eines. Diese Auswahl kann man in der Programmierung mit Switch-Case Anweisungen realisieren. Diese sehen gefolgt aus:
+
+```
+
+void setup() {
+  
+
+}
+
+void loop() {
+
+    switch (var) {
+  case label1:
+    // Statement(s)
+    break;
+  case label2:
+    // Statement(s)
+    break;
+  default:
+    // Statement(s)
+    break; // Wird nicht benötigt, wenn Statement(s) vorhanden sind
+}
+  
+
+}
+
+```
+
+### LED leuchten lassen:
+
+
+```
+void setup() {
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+    digitalWrite(13, HIGH);
+    delay(100);
+    digitalWrite(13, LOW);
+    delay(100);
+}
+```
+
+
+
 
 ___
 
@@ -78,12 +127,94 @@ Denke an die Zeiten, wie lange eine Ampelphase gehen soll!!
 
 Bevor wir etwas Programmieren können, muss zunächst der Schaltkreis aufgebaut werden. 
 Schließe dazu den Minus-Pol der LED an den Minuspol des Arduino an (GND). Und den Plus Pol an den Plus Pol des Arduinos (5V).
-Verbinde nun den Datenport mit **Port 8** des Arduinos
+Verbinde nun den Datenport mit **Port 10** des Arduinos
 
 Programmierung:
 
 ```
+#include <Adafruit_NeoPixel.h>
 
+#define PIN            10
+#define NUMPIXELS      4
+
+Adafruit_NeoPixel led = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  pixels.begin();
+}
+
+void loop() {
+    
+    // Rote Farbe
+    red_color = led.Color(250,0,0);
+    // LED 0 rot leuchten lassen
+    led.setPixelColor(0, red_color);
+    led.show();
+}
 ```
 
+## 2. Hall-Sensor
+
+Der Hallsensor erkennt Magneten. Beispiel:
+
+```
+bool mag_da = LOW;
+
+void setup() {
+  pinMode(8, INPUT);
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  boolean Sensor  = digitalRead(8);
+  if(!Sensor && !mag_da){
+    Serial.println("Magnet da");
+    mag_da = HIGH;
+  }
+  if(Sensor && mag_da){
+    Serial.println("Magnet weg");
+    mag_da = LOW;
+  }
+
+}
+```
+
+
+## 3. Taster
+
+```
+bool pressed = LOW;
+boolean Taster = LOW;
+
+void setup() {
+  pinMode(8, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  Taster  = digitalRead(8);
+  if(Taster && !pressed){
+    Serial.println("Taster gedrückt");
+    pressed = HIGH;
+  }
+  if(!Taster && pressed){
+    Serial.println("Taster nicht gedrückt");
+    pressed = LOW;
+  }
+
+}
+
+```
+## 4. Ampelsteuerung
+Dazu  Ampelstatus definieren. (Was passiert bei jeweiligem Status und was kann dabi passieren)
+- 0: Ampel grün; Fußgänger rot; Überprüfe: Fußgänger drückt Knopf
+- 1: Ampel gelb; Fußgänger rot;
+- 2: Ampel rot; Fußgänger rot;
+- 3: Ampel rot; Fußgänger grün;
+Überprüfe ob Auto Hallsensor triggert
+- 4: Ampel rot; Fußgänger rot;
+- 5: Ampel gelb; Fußgänger rot;
+- danach wieder Status 0 
 
