@@ -133,9 +133,10 @@ Programmierung:
 #define NUMPIXELS      4
 
 Adafruit_NeoPixel led = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+long red_color;
 
 void setup() {
-  pixels.begin();
+  led.begin();
 }
 
 void loop() {
