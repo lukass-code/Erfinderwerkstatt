@@ -18,6 +18,7 @@ Für den ESP32:<br>
 Wir verwenden aber:
 ```
 https://dl.espressif.com/dl/package_esp32_index.json
+boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json
 ```
 
 Für Adafruit:
