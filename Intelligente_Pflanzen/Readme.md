@@ -2,6 +2,14 @@
 
 Wir wollen mit einem ESP32 (eine Art Arduino mit Wlan) den Feuchtigkeitsgrad einer Pflanze überwachen und diesen mit einem LED Ring anzeigen.
 
+Die Datei "Example.ino" enthält einen beispielhaften kommentierten Code aus dem Workshop. Zum weiteren experimentieren enthält die Datei "Example_mit_WLAN.ino" einen Beispielcode, bei dem auch die WLAN Funktion mit berücksichtigt wird. 
+Eine Anleitung dazu ist zum Beispiel hier zu finden:
+https://randomnerdtutorials.com/esp32-http-get-post-arduino/ <br>
+(Interessant ist Abschnitt 1: "1. ESP32 HTTP GET: Value or Query in URL")
+<br>
+Die Daten können dann auf der Thingsspeak Plattform angezeigt werden:
+https://thingspeak.com/ <br> 
+(Ein konstenloser Account muss dafür erstellt werden)
 ## 0. Einrichtung:
 
 Für den ESP32:<br>
@@ -22,8 +30,8 @@ ___
 ## 1. Grundlagen
 
 ### Programmaufbau:
-Ein Arduinoprogramm besteht aus einem Header und einem Loop Teil.
-Hierbei wird der Loop Teil sehr schnell wiederholt solange dar Arduino läuft.
+Ein Arduinoprogramm besteht aus einem Einrichtungsteil (setup) und einem Wiederholungsteil (loop).
+Hierbei wird der Wiederholungsteil sehr schnell wiederholt solange dar Arduino läuft.
 
 ```
 void setup() {
@@ -38,8 +46,8 @@ void loop() {
 ```
 ### Variablen:
 Variablen sind wie Kisten. In sie kann etwas reingepackt werden. Man kann das was man reingepackt hat auch wieder auspacken oder verändern. es gibt verschiedene Typen. Wir nutzen:
-- Zahlen: int
-- Wahr/Falsch Wert: boolen
+- (Ganz-) Zahlen: int
+- Wahr/Falsch Wert: bool
 
 Zur Anzeige von Werten nutzen wir noch Serial.println(MeinWert);
 

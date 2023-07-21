@@ -1,80 +1,39 @@
 #include <Adafruit_NeoPixel.h>
-#include <WiFi.h>
-#include <HTTPClient.h>
 
-const char* ssid = "####";
-const char* password = "#####";
+#define PIN            33 //Definiere PIN LED Anschluss
+#define NUMPIXELS      16 //Definiere Anzahl LEDs
 
-#define PIN            32
-#define NUMPIXELS      16
-Adafruit_NeoPixel led = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+const int sensorPin = 34; //Definiere PIN Sensor
+float sensorValue; //Variable anlegen um Sensorwert später zu speichern
+int ledanzahl = 0; //Variable anlegen um Anzahl der LEDs die leuchten sollen zu speichern
 
-
-const int sensor_pin = 34;
-int sensorValue = 0;
-float maxLedValue = 0;
-
-long greenColor;
-int blackColor;
+Adafruit_NeoPixel led = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800); //LED Ring Objekt anlegen
+long green_color; //Variable für Farbe Grün
+long black_color; //Variable für Farbe Rot
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial.println("Start");
-  led.begin();
-
-  WiFi.begin(ssid, password);
-  Serial.println("Connecting");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("");
-  Serial.print("Connected to WiFi network with IP Address: ");
-  Serial.println(WiFi.localIP());
-
-  Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
+  Serial.begin(9600); //Starten des Seriellen Monitors
+  led.begin(); //LED aktivieren (initialisieren)
 }
 
 void loop() {
-  sensorValue = analogRead(sensor_pin);
-  Serial.println(sensorValue);
+  sensorValue = analogRead(sensorPin); //Sensorwert auslesen
+  Serial.println(sensorValue); //Sensorwert im Seriellen Monitor anzeigen
+  
+  ledanzahl = sensorValue*(16.0/2500.0); //Berechnen wie viele LEDs leuchten sollen
+  
+  delay(1000); //Warte eine Sekunde
 
-  greenColor = led.Color(0, 50, 0);
-  blackColor = led.Color(0, 0, 0);
+  green_color = led.Color(0, 50, 0); //Grüne Farbe anlegen
+  black_color = led.Color(0, 0, 0); // Schwarze Farbe anlegen
 
-  maxLedValue = sensorValue * (16.0 / 2000.0);
-  for (int i = 0; i < 16; i++) {
-    if (i < maxLedValue) {
-      Serial.println("green");
-      led.setPixelColor(i, greenColor);
-    } else {
-      Serial.println(maxLedValue);
-      led.setPixelColor(i, blackColor);
+  for (int i = 0; i < 16; i++) { //Schleife von 0 bis 15 (16-mal durchlaufen)
+    if(i < ledanzahl){ //Wenn dann Bedinngung, wenn i kleiner als die berechnete LED Anzahl ist, wird die LED auf Grün gesetzt
+    led.setPixelColor(i, green_color); //Setze die i-te LED auf Grün
+    }else{
+      led.setPixelColor(i, black_color); //Wenn Bedinnung (oben) nicht erfüllt setze die i-te LED auf Schwarz
     }
   }
-  led.show();
+  led.show(); //Lasse die LEDs in den Farben leuchten
 
-  if (WiFi.status() == WL_CONNECTED) {
-    HTTPClient http;
-
-    String serverPath = "#####" + String(sensorValue);
-
-    // Your Domain name with URL path or IP address with path
-    http.begin(serverPath.c_str());
-    int httpResponseCode = http.GET();
-    if (httpResponseCode > 0) {
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpResponseCode);
-      String payload = http.getString();
-      Serial.println(payload);
-    }
-    else {
-      Serial.print("Error code: ");
-      Serial.println(httpResponseCode);
-    }
-    // Free resources
-    http.end();
-    delay(10000);
-  }
 }
