@@ -1,4 +1,4 @@
-#include <Adafruit_NeoPixel.h>
+#include <Adafruit_NeoPixel.h> //Einbinden der Adafruit Bibliothek (quasi der Werkzeugkasten um die LED anzusteuern)
 
 #define PIN            33 //Definiere PIN LED Anschluss
 #define NUMPIXELS      16 //Definiere Anzahl LEDs

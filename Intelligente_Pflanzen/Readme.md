@@ -4,8 +4,8 @@ Wir wollen mit einem ESP32 (eine Art Arduino mit Wlan) den Feuchtigkeitsgrad ein
 
 Die Datei "Example.ino" enthält einen beispielhaften kommentierten Code aus dem Workshop. Zum weiteren experimentieren enthält die Datei "Example_mit_WLAN.ino" einen Beispielcode, bei dem auch die WLAN Funktion mit berücksichtigt wird. 
 Eine Anleitung dazu ist zum Beispiel hier zu finden:
-https://randomnerdtutorials.com/esp32-http-get-post-arduino/ <br>
-(Interessant ist Abschnitt 1: "1. ESP32 HTTP GET: Value or Query in URL")
+https://randomnerdtutorials.com/esp32-http-post-ifttt-thingspeak-arduino/ <br>
+(Interessant ist insbesondere Abschnitt "1. ESP32 HTTP POST Data (ThingSpeak)")
 <br>
 Die Daten können dann auf der Thingsspeak Plattform angezeigt werden:
 https://thingspeak.com/ <br> 
