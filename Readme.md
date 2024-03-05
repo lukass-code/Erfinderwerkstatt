@@ -1,3 +1,6 @@
+ 	 This repository is used for Coding-Projects with students.
+     -> More information: https://www.makemintcool.de
+
 # Tutorials und Erklärungen
 
 Um zu den Dateien zu kommen, bitte Entsprechenes anklicken an:
@@ -7,3 +10,4 @@ Um zu den Dateien zu kommen, bitte Entsprechenes anklicken an:
 
 ##  [-> Intelligente Pflanzen](/Intelligente_Pflanzen)
  
+
