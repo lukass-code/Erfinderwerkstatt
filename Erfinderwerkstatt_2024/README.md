@@ -1,14 +1,13 @@
-# Erfinderwerkstatt 2023
+# Erfinderwerkstatt 2024
 
 Hier findet ihr eure Programme aus der Erfinderwerkstatt
 
-# Ampelkreuzung - Arduino-Guide
 
 ## 0. Grundlagen
 
 ### Programmaufbau:
 Ein Arduinoprogramm besteht aus einem Header und einem Loop Teil.
-Hierbei wird der Loop Teil sehr schnell wiederholt solange dar Arduino läuft.
+Hierbei wird der Loop Teil sehr schnell wiederholt solange der Arduino läuft.
 
 ```
 void setup() {
@@ -20,7 +19,45 @@ void loop() {
   // put your main code here, to run repeatedly:
 
 }
+
 ```
+
+### Erstes Programm (Hello World)
+
+Wir lassen die eingebaute LED auf dem ESP blinken
+
+```
+void setup() {
+  pinMode(2, OUTPUT);
+
+}
+
+void loop() {
+  digitalWrite(2, HIGH);
+  delay(500);
+
+}
+```
+Blinkt die LED? Wenn nicht warum blinkt sie nicht? Ändere den Code, dass die Blink
+<br> (TIPP: um die LED Auszuschalten verwende "LOW")
+
+
+Besserer Programmierstil:
+```
+#define LED_PIN = 2
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+
+}
+
+void loop() {
+  digitalWrite(LED_PIN, HIGH);
+  delay(500);
+
+}
+```
+
 ### Variablen:
 Variablen sind wie Kisten. In sie kann etwas reingepackt werden. Man kann das was man reingepackt hat auch wieder auspacken oder verändern. es gibt verschiedene Typen. Wir nutzen:
 - Zahlen: int
@@ -54,6 +91,50 @@ for (int i=0; i > 10; i++){
     Serial.println(i);
 }
 ```
+ ### Übung:
+Erzeuge folgende Ausgabe in der Console:
+
+```
+0
+2
+4
+6
+8
+10
+12
+14
+18
+20
+0
+2
+...
+```
+Tipp: Das Multiplizierzeichen ist folgendes: *
+
+
+Etwas schwieriger
+
+ Erzeuge folgende Ausgabe in der Console:
+ (Die letze Reihe enthält 100 #)
+
+ ```
+ #
+ ##
+ ###
+ ####
+ #####
+ ######
+ #######
+ ...
+ ##################################################################################################
+ #
+ ##
+ ###
+ ...
+ ```
+
+
+
 
 
 
@@ -106,23 +187,6 @@ void loop() {
 
 ```
 
-### LED leuchten lassen:
-
-
-```
-void setup() {
-  pinMode(13, OUTPUT);
-  Serial.begin(9600);
-}
-
-void loop() {
-    digitalWrite(13, HIGH);
-    delay(100);
-    digitalWrite(13, LOW);
-    delay(100);
-}
-```
-
 
 ### RGB - LED
 
@@ -149,6 +213,8 @@ void loop() {
     led.show();
 }
 ```
+Um Farben zu suchen:
+https://htmlcolorcodes.com/color-picker/
 
 
 ## 3. Taster
