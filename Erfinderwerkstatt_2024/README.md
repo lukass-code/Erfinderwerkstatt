@@ -44,7 +44,7 @@ Blinkt die LED? Wenn nicht warum blinkt sie nicht? Ändere den Code, dass die Bl
 
 Besserer Programmierstil:
 ```
-#define LED_PIN = 2
+#define LED_PIN  2
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
